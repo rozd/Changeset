@@ -46,6 +46,68 @@ extension UICollectionView {
 	}
 }
 
+// MARK: - Nested Collections
+
+extension UITableView {
+
+	open func update<C, E: Collection>(with edits: Array<Changeset<C>.Edit>, animation: UITableView.RowAnimation = .automatic) where E.Element: Equatable, C.Element == E {
+		guard !edits.isEmpty else { return }
+
+		let indexSets = batchIndexSets(from: edits)
+
+		self.beginUpdates()
+		if !indexSets.deletions.isEmpty { self.deleteSections(indexSets.deletions, with: animation) }
+		if !indexSets.insertions.isEmpty { self.insertSections(indexSets.insertions, with: animation) }
+		if !indexSets.updates.deletions.isEmpty { self.deleteRows(at: indexSets.updates.deletions, with: animation) }
+		if !indexSets.updates.insertions.isEmpty { self.insertRows(at: indexSets.updates.insertions, with: animation) }
+		if !indexSets.updates.updates.isEmpty { self.reloadRows(at: indexSets.updates.updates, with: animation) }
+		self.endUpdates()
+	}
+
+}
+
+extension UICollectionView {
+
+	open func update<C, E: Collection>(with edits: Array<Changeset<C>.Edit>, completion: ((Bool) -> Void)? = nil) where E.Element: Equatable, C.Element == E {
+		guard !edits.isEmpty else { return }
+
+		let indexSets = batchIndexSets(from: edits)
+
+		self.performBatchUpdates({
+			if !indexSets.deletions.isEmpty { self.deleteSections(indexSets.deletions) }
+			if !indexSets.insertions.isEmpty { self.insertSections(indexSets.insertions) }
+			if !indexSets.updates.deletions.isEmpty { self.deleteItems(at: indexSets.updates.deletions) }
+			if !indexSets.updates.insertions.isEmpty { self.insertItems(at: indexSets.updates.insertions) }
+			if !indexSets.updates.updates.isEmpty { self.reloadItems(at: indexSets.updates.updates) }
+		}, completion: completion)
+	}
+
+}
+
+// MARK: - Helpers
+
+private func batchIndexSets<C, E: Collection>(from edits: Array<Changeset<C>.Edit>) -> (insertions: IndexSet, deletions: IndexSet, updates: (insertions: Array<IndexPath>, deletions: Array<IndexPath>, updates: Array<IndexPath>)) where E.Element: Equatable, C.Element == E {
+    var insertions: IndexSet = []
+    var deletions: IndexSet = []
+	var updates: (insertions: Array<IndexPath>, deletions: Array<IndexPath>, updates: Array<IndexPath>) = (insertions: [], deletions: [], updates: [])
+
+    for edit in edits {
+		switch edit.operation {
+		case .deletion:
+			deletions.insert(edit.destination)
+		case .insertion:
+			insertions.insert(edit.destination)
+		case .move(let origin):
+			deletions.insert(origin)
+			insertions.insert(edit.destination)
+		case .substitution(let source):
+			updates = batchIndexPaths(from: Changeset.edits(from: source, to: edit.value), in: edit.destination)
+		}
+    }
+
+    return (insertions: insertions, deletions: deletions, updates: updates)
+}
+
 private func batchIndexPaths<C> (from edits: Array<Changeset<C>.Edit>, in section: Int) -> (insertions: Array<IndexPath>, deletions: Array<IndexPath>, updates: Array<IndexPath>) {
 	
 	var insertions: Array<IndexPath> = []
