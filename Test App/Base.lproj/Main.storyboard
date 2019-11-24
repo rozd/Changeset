@@ -1,9 +1,10 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10112" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="I9z-UW-4t5">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="I9z-UW-4t5">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10083"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Collection View-->
@@ -11,9 +12,9 @@
             <objects>
                 <collectionViewController id="KWc-S9-Oxs" customClass="CollectionViewController" customModule="Changeset_App" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" id="D7a-9v-vGw">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="gf7-ok-kLo">
                             <size key="itemSize" width="56" height="56"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -22,7 +23,7 @@
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="UCD-KA-GYI" customClass="CollectionViewCell" customModule="Changeset_App" customModuleProvider="target">
-                                <rect key="frame" x="8" y="72" width="56" height="56"/>
+                                <rect key="frame" x="8" y="8" width="56" height="56"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="56" height="56"/>
@@ -32,11 +33,10 @@
                                             <rect key="frame" x="8" y="8" width="40" height="40"/>
                                             <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <constraints>
@@ -57,13 +57,24 @@
                     </collectionView>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Collection View" id="2mI-84-RS0">
-                        <barButtonItem key="rightBarButtonItem" image="test-changes" id="L6O-KK-n0W">
-                            <connections>
-                                <action selector="test:" destination="KWc-S9-Oxs" id="V8c-HB-k4p"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem image="test-changes" id="L6O-KK-n0W">
+                                <connections>
+                                    <action selector="test:" destination="KWc-S9-Oxs" id="V8c-HB-k4p"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Item" image="text.badge.checkmark" catalog="system" id="PJp-Kq-84v">
+                                <connections>
+                                    <action selector="hierarchicalTest:" destination="KWc-S9-Oxs" id="GYY-WE-CGs"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="hierarchicalTestButtonItem" destination="PJp-Kq-84v" id="ZYH-DG-XT9"/>
+                        <outlet property="testButtonItem" destination="L6O-KK-n0W" id="hnC-uR-3QI"/>
+                    </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DrA-cn-IWJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -73,20 +84,19 @@
         <scene sceneID="TtQ-0p-E7H">
             <objects>
                 <tableViewController id="Kur-rR-hdb" customClass="TableViewController" customModule="Changeset_App" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="4Nc-Po-bh1">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="4Nc-Po-bh1">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" textLabel="adw-9p-VJi" style="IBUITableViewCellStyleDefault" id="Osi-4m-EYF">
-                                <rect key="frame" x="0.0" y="92" width="600" height="44"/>
+                                <rect key="frame" x="20" y="55.5" width="374" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Osi-4m-EYF" id="XOC-nb-TBO">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="374" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="adw-9p-VJi">
-                                            <rect key="frame" x="15" y="0.0" width="570" height="43.5"/>
+                                            <rect key="frame" x="20" y="0.0" width="334" height="44"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -103,13 +113,24 @@
                     </tableView>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Table View" id="X7P-uE-6dE">
-                        <barButtonItem key="rightBarButtonItem" image="test-changes" id="ZmP-P0-Aox">
-                            <connections>
-                                <action selector="test:" destination="Kur-rR-hdb" id="lzt-hL-Seb"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem image="test-changes" id="ZmP-P0-Aox">
+                                <connections>
+                                    <action selector="test:" destination="Kur-rR-hdb" id="lzt-hL-Seb"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Item" image="text.badge.checkmark" catalog="system" id="Q74-tX-5VP">
+                                <connections>
+                                    <action selector="hierarchicalTest:" destination="Kur-rR-hdb" id="DDE-aS-KAU"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="hierarchicalTestButtonItem" destination="Q74-tX-5VP" id="Jpk-68-LwF"/>
+                        <outlet property="testButtonItem" destination="ZmP-P0-Aox" id="eSv-6g-sTd"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0Bu-hn-FB9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -121,7 +142,7 @@
                 <navigationController id="wDy-jb-54J" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Table" image="table" selectedImage="table-selected" id="aIh-DG-UqW"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="4pe-yc-ob6">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -139,7 +160,7 @@
                     <tabBarItem key="tabBarItem" title="Collection" image="collection" selectedImage="collection-selected" id="127-n6-M9o"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="wUz-pn-oDE">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -157,8 +178,9 @@
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="I9z-UW-4t5" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="5eI-4j-2pl">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBar>
                     <connections>
                         <segue destination="wDy-jb-54J" kind="relationship" relationship="viewControllers" id="X26-ug-9cA"/>
@@ -176,5 +198,6 @@
         <image name="table" width="24" height="22"/>
         <image name="table-selected" width="24" height="22"/>
         <image name="test-changes" width="24" height="13"/>
+        <image name="text.badge.checkmark" catalog="system" width="64" height="54"/>
     </resources>
 </document>

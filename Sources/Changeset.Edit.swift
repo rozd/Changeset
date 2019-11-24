@@ -22,7 +22,7 @@ public extension Changeset {
 		public enum Operation {
 			case insertion
 			case deletion
-			case substitution
+			case substitution(source: Element)
 			case move(origin: Offset)
 		}
 		

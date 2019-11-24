@@ -105,7 +105,7 @@ public struct Changeset<C: Collection> where C.Iterator.Element: Equatable {
 								insertion.append(edit)
 								currentRow[column] = insertion
 							} else {
-								let edit = Edit(operation: .substitution, value: target[targetOffset], destination: row - 1)
+								let edit = Edit(operation: .substitution(source: source[sourceOffset]), value: target[targetOffset], destination: row - 1)
 								substitution.append(edit)
 								currentRow[column] = substitution
 							}
